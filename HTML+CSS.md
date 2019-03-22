@@ -31,3 +31,49 @@
   * aside 侧边栏，嵌套在main中。
   * footer 页脚
   * section 和 article 是main中的字内容。一般是section中包含几个 article。
+
+4. figure标签
+
+  figure标签是对重要内容添加的说明，说明性文字用 figcaption标签包裹
+
+  ```
+    <figure>
+      <img />
+      <figcaption>对图片、音频、方程等内容的说明性文字</figcaption>
+    </figure>
+  ```
+
+5. img图片和CSS中的background背景图使用区别：
+
+    使用CSS中的background属性设置图片是为了装饰网页，提升视觉效果。
+
+    而使用img元素插入图片是为了让内容有意义，图片也是内容的一部分。
+
+6. video标签
+
+    * src属性：资源地址
+    * controls属性： 对视频的控制，暂停快进等
+    * 标签内可以有段落文字存在，是在浏览器不支持video标签时显示的。
+    * 不同的浏览器会兼容不同的视频格式，比如 FireFox 和 Chrome支持WebM格式，Internet Explorer 和 Safari 支持MP4
+
+      同时针对此，video标签中可以嵌套source标签，来供可支持浏览器的选择。
+
+      ```
+        <video controls>
+          <source src="rabbit320.mp4" type="video/mp4">
+          <source src="rabbit320.webm" type="video/webm">
+          <p>你的浏览器不支持 HTML5 视频。可点击<a href="rabbit320.mp4">此链接</a>观看</p>
+        </video>
+      ```
+
+7. track标签可以给视频添加字幕，字幕文件为.vtt结尾的文件
+
+    ```
+    <video controls>
+      <source src="example.mp4" type="video/mp4">
+      <source src="example.webm" type="video/webm">
+      <track kind="subtitles" src="subtitles_en.vtt" srclang="en">
+    </video>
+    ```
+
+8. 
