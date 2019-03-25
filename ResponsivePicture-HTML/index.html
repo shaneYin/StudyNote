@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>用picture标签 img标签的srcset和sizes属性做图片的响应式</title>
+    <style media="screen">
+      img {
+        max-width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <p>下面的响应式图片是用到了 img标签的 srcset属性和sizes属性</p>
+    <img srcset="images/img-320w.jpg 320w,
+                 images/img-480w.jpg 480w,
+                 images/img-800w.jpg 800w"
+         sizes="(max-width: 320px) 280px,
+                (max-width: 480px) 440px,
+                800px"
+         src="images/img-800w.jpg"
+         alt="a pretty girl">
+
+    <p>下面的响应式图片用到了 picture标签和 嵌套在其中的source 标签</p>
+    <p>source标签中包含 media 媒体查询属性和 srcset 对应src匹配属性</p>
+    <picture>
+      <source media="(max-width: 799px)" srcset="images/elva-480w-close-portrait.jpg">
+      <source media="(min-width: 800px)" srcset="images/elva-800w.jpg">
+      <img src="images/elva-800w.jpg" alt="Chris standing up holding his daughter Elva">
+    </picture>
+  </body>
+</html>
