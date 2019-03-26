@@ -76,4 +76,6 @@
     </video>
     ```
 
-8. 
+8. 响应式图片的内容在 *ResponsivePicture-HTML* 中
+9. 表格的内容在 *Table-HTML* 中
+10. 
