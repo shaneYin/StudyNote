@@ -11,7 +11,6 @@
   *<b> <i> <u>* 这些标签并没有语义化，是表象元素。
 
 2. 高级文字排版
-
   * <blockquote cite="https://xxx.com"></blockquote> 标签用于引用原文，cite属性代表引用地址，是块元素。
 
   <q cite="https://xxx.com"></q> 标签用于引用原文，cite属性代表引用地址，是行内元素。
@@ -78,4 +77,45 @@
 
 8. 响应式图片的内容在 *ResponsivePicture-HTML* 中
 9. 表格的内容在 *Table-HTML* 中
-10. 
+10. 表单单行域类型有：
+    * text
+    * email
+    * password
+    * search
+    * tel
+    * url
+11. 下拉内容方面， select标签中可以添加 optgroup标签给option项分组。
+
+    select标签中 有一个 **multiple** 属性，可以定义为多选下拉框
+
+12. 使用 *datalist* 标签可以给 *input* 增加自动补全功能，如下：
+
+    ```
+    <input type="text" name="myFruit" id="myFruit" list="mySuggestion">
+    <datalist id="mySuggestion">
+      <option>Apple</option>
+      <option>Banana</option>
+      <option>Blackberry</option>
+      <option>Blueberry</option>
+      <option>Lemon</option>
+      <option>Lychee</option>
+      <option>Peach</option>
+      <option>Pear</option>
+    </datalist>
+    ```
+
+13. 高级表单部件 ， *input* 的 *type*
+    * number  只能输入数字，有 max, min, step 等属性约束其行为
+    * range   滑块，有 max, min, step 等属性约束其行为
+    * datetime-local   显示时间
+    * month   显示月
+    * time    显示时间
+    * week    显示星期
+    * color   拾色器
+    * file    文件选择
+    * hidden  隐藏元素，要设置name和value属性。
+    * image
+
+14. 进度条  
+    ![进度条](images/progress.png)
+    `<progress max="100" value="75">75/100</progress>`
