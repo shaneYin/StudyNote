@@ -119,3 +119,55 @@
 14. 进度条  
     ![进度条](images/progress.png)
     `<progress max="100" value="75">75/100</progress>`
+
+15. 表单发送文件 -- 使用 **enctype** 属性
+
+    ```
+    <form method="post" enctype="multipart/form-data">
+    <div>
+      <label for="file">Choose a file</label>
+      <input type="file" id="file" name="myFile">
+    </div>
+    <div>
+      <button>Send the file</button>
+    </div>
+    </form>
+    ```
+16. 常见的安全问题
+
+  **XSS:** 跨站脚本，XSS允许攻击者将客户端脚本注入到其他用户查看的Web页面中。攻击者可以使用跨站点脚本攻击的漏洞来绕过诸如同源策略之类的访问控制。
+
+  **CSRF:** CSRF攻击者试图将特权升级到特权用户(比如站点管理员)的权限，以执行他们不应该执行的操作
+
+  **SQL注入:** 一种试图在目标web站点使用的数据库上执行操作的攻击类型
+
+  **HTTP数据头注入和电子邮件注入:** 当您的应用程序基于表单上用户的数据输入构建HTTP头部或电子邮件时，就会出现这种类型的攻击
+
+17. 表单验证两种方式：
+
+  JavaScript校验，可以完全自定义校验方式。
+  HTML5内置，性能更好，但是不能自定义。
+
+18. HTML5内置属性校验
+
+  HTML5的内置属性都会依赖两个CSS伪类： *:valid* *:invalid*  前者是输入正确的样式，后者相反。
+  * **required** 属性。 放在 *input* 里面， 会检验value是否为空，为空会阻止表单提交。
+  * **pattern** 属性。 值为 *正则表达式* 字符串，会与input元素中的value进行匹配
+  * **minlength** 和 **maxlength**
+  * 另外，想自定义错误提示的文字信息，可以用input元素的 **setCustomValidity()** 方法。
+
+19. **role** 属性: 赋予标签意义，使无意义的标签具备可访问性。 几个属性值： *listbox* *presentation* *option* *tab* *menu*
+20. **aria-selected** 属性: 赋予标签意义，标记当前选中元素。 值是true或false。
+21. 使用 *AJAX* 发送表单数据：
+    * 手动构建XMLHttpRequest，需要把数据转化成form表单格式  {test: 'ok'} -> 'test=ok'。
+    * 使用XMLHttpRequest和FormData(表单对象) 发送表单数据, 发送时，请求头会自动设置。 `new FormData()`
+
+22. FormData对象部分API
+    * append(key, value) 为formData对象添加键值对
+    * delete(key) 通过key 删除键值对
+    * get(key) 通过key获得键值对
+    * getAll(key) 获得所有key对应的值的数组
+    * has(key) 查看是否有改键，返回true或false
+    * set(key) 为key设置新值，如果没有则添加
+
+### CSS

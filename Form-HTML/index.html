@@ -5,15 +5,159 @@
   <meta charset="utf-8">
   <title>表单</title>
   <link href="payment-form.css" rel="stylesheet">
+  <style media="screen">
+    body {
+    font: 1em sans-serif;
+    padding: 0;
+    margin-bottom: 100px;
+  }
+
+  form {
+    max-width: 200px;
+    margin: 0;
+    padding: 0 5px;
+  }
+
+  p>label {
+    display: block;
+  }
+
+  input[type=text],
+  input[type=email],
+  input[type=number],
+  textarea,
+  fieldset {
+    /* required to properly style form
+ elements on WebKit based browsers */
+    -webkit-appearance: none;
+
+    width: 100%;
+    border: 1px solid #333;
+    margin: 0;
+
+    font-family: inherit;
+    font-size: 90%;
+
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+
+  input:invalid {
+    box-shadow: 0 0 5px 1px red;
+  }
+
+  input:focus:invalid {
+    outline: none;
+  }
+
+  h1::before {
+    content: '**';
+  }
+  h2::before {
+    content: '*';
+  }
+
+  /* 自定义select样式 */
+  .select {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 10px;
+
+    font-size: 0.625em;
+    font-family: Verdana, Arial, sans-serif;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: .1em 2.5em .2em .5em;
+    width: 10em;
+    border: .2em solid #000;
+    border-radius : .4em;
+    box-shadow    : 0 .1em .2em rgba(0,0,0,.45);
+    background : #F0F0F0;
+    background : -webkit-linear-gradient(90deg, #E3E3E3, #fcfcfc 50%, #f0f0f0);
+    background : linear-gradient(0deg, #E3E3E3, #fcfcfc 50%, #f0f0f0);
+  }
+  .select::after {
+    content: "▼";
+    position: absolute;
+    z-index: 1;
+    right: 0;
+    top: 0;
+    -moz-box-sizing : border-box;
+    box-sizing : border-box;
+    height: 100%;
+    width: 2em;
+    padding-top: .1em;
+    border-left: .2em solid #000;
+    border-radius: 0 .1em .1em 0;
+    background-color: #000;
+    color: #FFF;
+    text-align: center;
+  }
+  .select, .select.focus, .active {
+    outline: none;
+    box-shadow: 0 0 3px 1px #227755;
+  }
+  .select .value {
+    display: inline-block;
+    width: 100%;
+    overflow: hidden;
+    vertical-align: top;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+  .select .optlist {
+    position: absolute;
+    top: 100%;
+    left: 0;
+
+    z-index : 2;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    -moz-box-sizing : border-box;
+    box-sizing : border-box;
+    min-width : 100%;
+    max-height: 10em;
+    overflow-y: auto;
+    overflow-x: hidden;
+    border: .2em solid #000;
+    border-top-width : .1em;
+    border-radius: 0 0 .4em .4em;
+    box-shadow: 0 .2em .4em rgba(0,0,0,.4);
+    background: #f0f0f0;
+  }
+  .select .optlist.hidden{
+    max-height: 0;
+    visibility: hidden;
+  }
+
+  .select .option {
+    padding: .2em .3em
+  }
+  .select .highlight {
+    background: #000;
+    color: #FFF;
+  }
+
+  .widget select, .no-widget .select {
+    position: absolute;
+    left: -5000em;
+    height: 0;
+    overflow: hidden;
+  }
+</style>
 </head>
 
-<body>
+<body style="padding-left: 50px;">
+
+  <h1>表单举例</h1>
+
   <form action="index.html" method="post">
-    <h1>Payment form</h1>
+    <h2>支付表单</h2>
     <p>Required fields are followed by <strong><abbr title="required">*</abbr></strong>.</p>
 
     <section>
-      <h2>Contact information</h2>
+      <h3>Contact information</h3>
       <fieldset>
         <legend>Title</legend>
         <ul>
@@ -54,7 +198,7 @@
       </p>
     </section>
     <section>
-      <h2>Payment information</h2>
+      <h3>Payment information</h3>
       <p>
         <label for="card">
           <span>Card type:</span>
@@ -83,6 +227,200 @@
     </section>
     <p> <button type="submit">Validate the payment</button> </p>
   </form>
+
+
+
+  <h2>表单验证</h2>
+
+  <form>
+    <p>
+      <fieldset>
+        <legend>Title<abbr title="This field is mandatory">*</abbr></legend>
+        <input type="radio" required name="title" id="r1" value="Mr"><label for="r1">Mr.</label>
+        <input type="radio" required name="title" id="r2" value="Ms"><label for="r2">Ms.</label>
+      </fieldset>
+    </p>
+    <p>
+      <label for="n1">How old are you?</label>
+      <!-- The pattern attribute can act as a fallback for browsers which
+         don't implement the number input type but support the pattern attribute.
+         Please note that browsers that support the pattern attribute will make it
+         fail silently when used with a number field.
+         Its usage here acts only as a fallback -->
+      <input type="number" min="12" max="120" step="1" id="n1" name="age" pattern="\d+">
+    </p>
+    <p>
+      <label for="t1">What's your favorite fruit?<abbr title="This field is mandatory">*</abbr></label>
+      <input type="text" id="t1" name="fruit" list="l1" required pattern="[Bb]anana|[Cc]herry|[Aa]pple|[Ss]trawberry|[Ll]emon|[Oo]range">
+      <datalist id="l1">
+        <option>Banana</option>
+        <option>Cherry</option>
+        <option>Apple</option>
+        <option>Strawberry</option>
+        <option>Lemon</option>
+        <option>Orange</option>
+      </datalist>
+    </p>
+    <p>
+      <label for="t2">What's your e-mail?</label>
+      <input type="email" id="t2" name="email">
+    </p>
+    <p>
+      <label for="t3">Leave a short message</label>
+      <textarea id="t3" name="msg" maxlength="140" rows="5"></textarea>
+    </p>
+    <p>
+      <button>Submit</button>
+    </p>
+  </form>
+
+  <div class="no-widget" id="selectForm">
+    <h2>自定义 select 标签</h2>
+    <form class="" action="index.html" method="post">
+      <select name="DNF职业">
+        <option>鬼剑士</option>
+        <option>格斗家</option>
+        <option>神枪手</option>
+        <option>圣职者</option>
+        <option>魔法师</option>
+        <option>守护者</option>
+        <option>魔枪士</option>
+      </select>
+      <div class="select" tabindex="0" role="listbox">
+        <span class="value">鬼剑士</span>
+        <ul class="optlist hidden" role="presentation">
+          <li class="option" role="option">格斗家</li>
+          <li class="option" role="option">神枪手</li>
+          <li class="option" role="option">圣职者</li>
+          <li class="option" role="option">魔法师</li>
+          <li class="option" role="option">守护者</li>
+          <li class="option" role="option">魔枪士</li>
+        </ul>
+      </div>
+    </form>
+  </div>
+
 </body>
+<script type="text/javascript">
+  // 决定加载哪一个select
+  window.addEventListener('load', function() {
+    document.getElementById('selectForm').classList.remove('no-widget');
+    document.getElementById('selectForm').classList.add('widget');
+  });
+
+  // 给NodeList类添加方法
+  NodeList.prototype.forEach = function(callback) {
+    Array.prototype.forEach.call(this, callback);
+  }
+
+  // 使 select 无效
+  function deactivateSelect(select) {
+    if (!select.classList.contains('active')) {
+      return;
+    }
+    var optList = select.querySelector('.optlist');
+    optList.classList.add('hidden');
+    select.classList.remove('active');
+  }
+  // 使 select 有效
+  function activeSelect(select, selectList) {
+    if (select.classList.contains('active')) {
+      return;
+    }
+    selectList.forEach(deactivateSelect);
+    select.classList.add('active');
+  }
+
+  function toggleOptList(select) {
+    var optList = select.querySelector('.optlist');
+    optList.classList.toggle('hidden');
+  }
+
+  function highlightOption(select, option) {
+    var optionList = select.querySelectorAll('.option');
+
+    // 移除所有高亮
+    optionList.forEach(function(other) {
+      other.classList.remove('highlight');
+    });
+    // 添加一个
+
+    option.classList.add('highlight');
+  }
+
+  function updateValue(select, index) {
+
+    var nativeWidget = select.previousElementSibling;
+    var value = select.querySelector('.value');
+    var optionList = select.querySelectorAll('.option');
+
+    optionList.forEach(function (option) {
+      option.setAttribute('aria-selected','false');
+    });
+    optionList[index].setAttribute('aria-selected','true');
+
+    nativeWidget.selectedIndex = index;
+    value.innerHTML = optionList[index].innerHTML;
+
+    highlightOption(select, optionList[index]);
+  };
+
+  function getIndex(select) {
+    var nativeWidget = select.previousElementSibling;
+
+    return nativeWidget.selectedIndex;
+  };
+
+  window.addEventListener('load', function() {
+    var selectList = document.querySelectorAll('.select');
+
+    selectList.forEach(function(select) {
+      var optionList = select.querySelectorAll('.option');
+      var selectedIndex = getIndex(select);
+
+      select.tabIndex = 0;
+      select.previousElementSibling.tabIndex = -1;
+
+      updateValue(select, selectedIndex);
+
+      optionList.forEach(function(option, index) {
+        option.addEventListener('mouseover', function() {
+          highlightOption(select, option);
+        });
+        option.addEventListener('click', function() {
+          updateValue(select, index);
+        });
+      });
+      select.addEventListener('keyup', function(event) {
+        var length = optionList.length,
+          index = getIndex(select);
+
+        if (event.keyCode === 40 && index < length - 1) {
+          index++;
+        }
+
+        if (event.keyCode === 38 && index > 0) {
+          index--;
+        }
+
+        updateValue(select, index);
+      });
+
+
+      select.addEventListener('click', function(event) {
+        toggleOptList(select);
+
+      });
+
+      select.addEventListener('focus', function(event) {
+        activeSelect(select, selectList);
+      });
+
+      select.addEventListener('blur', function(event) {
+        deactivateSelect(select);
+      });
+    });
+  });
+</script>
 
 </html>
